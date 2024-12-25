@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:44:58 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/24 20:57:21 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/25 11:32:29 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t	count_rotate_both_rev_by_bool(
 	return (i);
 }
 
-size_t	count_rotate_both_rev_by_i(
+size_t	count_rotate_both_rev_by_index(
 		t_elem **stack_a, t_elem **stack_b, int num, int rev_arg_index)
 {
 	size_t	i;
@@ -70,23 +70,23 @@ size_t	count_rotate_both_rev_by_i(
 size_t	latest_cheapest_rotation(
 		t_elem **stack_a, t_elem **stack_b, int num, size_t cheapest_before)
 {
-	int		i;
+	size_t	cheapest;
 	size_t	count;
 
-	i = cheapest_before;
+	cheapest = cheapest_before;
 	count = count_rotate_both_rev_by_bool(stack_a, stack_b, num, 0);
-	if (count < i)
-		i = count;
+	if (count < cheapest)
+		cheapest = count;
 	count = count_rotate_both_rev_by_bool(stack_a, stack_b, num, 1);
-	if (count < i)
-		i = count;
-	count = count_rotate_both_rev_by_i(stack_a, stack_b, num, 0);
-	if (count < i)
-		i = count;
-	count = count_rotate_both_rev_by_i(stack_a, stack_b, num, 1);
-	if (count < i)
-		i = count;
-	return (i);
+	if (count < cheapest)
+		cheapest = count;
+	count = count_rotate_both_rev_by_index(stack_a, stack_b, num, 0);
+	if (count < cheapest)
+		cheapest = count;
+	count = count_rotate_both_rev_by_index(stack_a, stack_b, num, 1);
+	if (count < cheapest)
+		cheapest = count;
+	return (cheapest);
 }
 
 size_t	find_cheapest_rotation(
@@ -94,19 +94,19 @@ size_t	find_cheapest_rotation(
 {
 	t_elem	*initial;
 	t_elem	*current;
-	size_t	i;
+	size_t	cheapest;
 
 	if (push_arg_index)
 		initial = *stack_b;
 	else
 		initial = *stack_a;
-	i = count_rotate_both_rev_by_bool(stack_a, stack_b, initial->num, 1);
-	i = latest_cheapest_rotation(stack_a, stack_b, initial->num, i); // RECONSIDER
+	cheapest = count_rotate_both_rev_by_bool(stack_a, stack_b, initial->num, 1); // RECONSIDER
+	cheapest = latest_cheapest_rotation(stack_a, stack_b, initial->num, cheapest);
 	current = initial->next;
 	while (current != initial)
 	{
-		i = latest_cheapest_rotation(stack_a, stack_b, initial->num, i);
+		cheapest = latest_cheapest_rotation(stack_a, stack_b, initial->num, cheapest);
 		current = current->next;
 	}
-	return (i);
+	return (cheapest);
 }
