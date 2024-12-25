@@ -6,19 +6,22 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:33:50 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/24 20:58:11 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/25 21:26:23 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+
 void	print_stack(t_elem **stack, char name)
 {
 	t_elem	*initial;
 
+	ft_printf("---\n");
 	if (!stack || !*stack)
 	{
 		ft_printf("Stack %c empty\n", name);
+		ft_printf("---\n");
 		return ;
 	}
 	ft_printf("Stack %c:\n", name);
@@ -30,6 +33,7 @@ void	print_stack(t_elem **stack, char name)
 		ft_printf("%d\n", (*stack)->num);
 		(*stack) = (*stack)->next;
 	}
+	ft_printf("---\n");
 }
 
 int	main(int argc, char **argv)
@@ -40,10 +44,10 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (1);
 	stack_a = args_to_list(argc, argv);
-	if (!stack_a)
-		ft_printf("Listmaking issue\n");
-	if (args_dupe_check(&stack_a))
-		ft_printf("Dupes found\n");
+//	if (!stack_a)
+//		ft_printf("Listmaking issue\n");
+//	if (args_dupe_check(&stack_a))
+//		ft_printf("Dupes found\n");
 	if (!stack_a || args_dupe_check(&stack_a))
 	{
 		stack_clear(&stack_a);
@@ -51,10 +55,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	stack_b = NULL;
-	if (is_sorted(&stack))
+	if (is_sorted(&stack_a))
 		return (0);
-	ft_printf("Turks!\n");
 	turks(&stack_a, &stack_b);
+	print_stack(&stack_a, 'a');
+	print_stack(&stack_b, 'b');
 	stack_clear(&stack_a);
 	stack_clear(&stack_b);
 	return (0);
