@@ -6,43 +6,41 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:36:26 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/24 20:55:25 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/25 21:24:21 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	easy_sort(t_elem **stack, char name)
-{
-	size_t	length;
+#include "push_swap.h"
 
-	length = size(stack);
-	if (length == 2)
+static void sort_up_to_three(t_elem **stack, char name)
+{
+	int		smallest;
+	int		largest;
+
+	if (size(stack) == 2)
+		return (rotate(stack, name));
+	smallest_and_largest(stack, &smallest, &largest);
+	if ((*stack)->num == largest)
 	{
 		rotate(stack, name);
+		if (!is_sorted(stack))
+			swap(stack, name);
 	}
-	if (length == 3)
+	else if ((*stack)->num == smallest)
 	{
-		sort_three(stack, name);
-		return (1);
+		rev_rotate(stack, name);
+		swap(stack, name);
 	}
-	return (0);
+	else
+	{
+		if ((*stack)->next->num == largest)
+			rev_rotate(stack, name);
+		else
+			swap(stack, name);
+	}
 }
 
-/*
-void	turks_migration_to_b(t_elem **stack_a, t_elem **stack_b)
-{
-	size_t	size;
-	
-	i = ;
-
-	while ((*stack_a)->next->next != (*stack_b)->prev)
-	{
-		smallest_and_largest(stack_a, &sm_a, &lg_a);
-		smallest_and_largest(stack_b, &sm_b, &lg_b);
-		
-	}
-}*/
-
-void	turks_init(t_elem **stack_a, t_elem **stack_b, size_t length)
+static void	turks_init(t_elem **stack_a, t_elem **stack_b, size_t length)
 {
 	push(stack_a, stack_b, 'b');
 	if (length > 4)
@@ -52,7 +50,48 @@ void	turks_init(t_elem **stack_a, t_elem **stack_b, size_t length)
 			rotate(stack_b, 'b');
 	}
 	if (!is_sorted(stack_a))
-		easy_sort(stack_a);
+		sort_up_to_three(stack_a, 'a');
+}
+
+static void	turks_migration(t_elem **stack_a, t_elem **stack_b, bool dest_arg_i)
+{
+	t_elem	**migr_src;
+
+	if (dest_arg_i)
+		migr_src = stack_a;
+	else
+		migr_src = stack_b;
+	while (*migr_src)
+	{
+		if (dest_arg_i && (((*stack_a)->next->next == (*stack_a)->prev) || is_sorted(stack_a)))
+			break ;
+//		ft_printf("migrating...\n");
+		do_cheapest_rotation(stack_a, stack_b, dest_arg_i);
+//		ft_printf("rotated...\n");
+		if (dest_arg_i)
+			push(stack_a, stack_b, 'b');
+		else
+			push(stack_b, stack_a, 'a');
+//		ft_printf("pushed...\n");
+	}
+}
+
+static void	turks_final_a_rotation(t_elem **stack_a)
+{
+	int		smallest;
+	int		largest;
+
+	smallest_and_largest(stack_a, &smallest, &largest);
+	if (num_index(stack_a, smallest) < (size(stack_a) / 2))
+	{
+		while ((*stack_a)->num != smallest)
+			rotate(stack_a, 'a');
+	}
+	else
+	{
+		while ((*stack_a)->num != smallest)
+			rev_rotate(stack_a, 'a');
+	}	
 }
 
 void	turks(t_elem **stack_a, t_elem **stack_b)
@@ -62,13 +101,14 @@ void	turks(t_elem **stack_a, t_elem **stack_b)
 	length = size(stack_a);
 	if (length <= 3)
 	{
-		easy_sort(stack_a, 'a');
+		sort_up_to_three(stack_a, 'a');
 		return ;
 	}
 	turks_init(stack_a, stack_b, length);
-//	if ((*stack_a)->next == (*stack_a)->prev)
-//		return turks_for_four_past_init(t_elem **stack_a, t_elem **stack_b);
-	turks_migration_to_b(stack_a, stack_b);
-	while ((*stack_a)->next->)
-
+//	ft_printf("migration 1\n");
+	turks_migration(stack_a, stack_b, 1);
+//	ft_printf("migration 2\n");
+	turks_migration(stack_a, stack_b, 0);
+//	ft_printf("turks over\n");
+	turks_final_a_rotation(stack_a);
 }
