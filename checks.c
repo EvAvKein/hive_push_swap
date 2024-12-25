@@ -6,13 +6,13 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:58:17 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/24 20:59:39 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/25 21:13:18 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h" 
 
-int	is_sorted(t_elem **stack)
+bool	is_sorted(t_elem **stack)
 {
 	t_elem	*initial;
 	t_elem	*current;
@@ -58,7 +58,7 @@ void	smallest_and_largest(t_elem **stack, int *smallest, int *largest)
 	if (!stack || !*stack)
 	{
 		ft_printf("BUG: Looking for smallest and largest in empty stack\n");
-		return (0);
+		return ;
 	}
 	initial = *stack;
 	current = initial;
@@ -76,7 +76,7 @@ void	smallest_and_largest(t_elem **stack, int *smallest, int *largest)
 	}
 }
 
-size_t	index_for_prepend(t_elem **stack, int new, int descending)
+size_t	index_for_prepend(t_elem **stack, int new, bool descending)
 {
 	int		smallest;
 	int		largest;
@@ -94,13 +94,16 @@ size_t	index_for_prepend(t_elem **stack, int new, int descending)
 		return (num_index(stack, largest));
 	current = initial->next;
 	i = 1;
+//	print_stack(stack, '?');
 	while (current != initial)
 	{
+//		ft_printf("%i ?= %i\n", current->num, initial->num);
 		if ((new < current->num) == descending
 			&& (new > current->next->num) == descending)
 			return (i);
+		current = current->next;
 		i++;
 	}
-	ft_printf("BUG: Didn't find index for prepend\n");
+//	ft_printf("BUG: Didn't find index for prepend\n");
 	return (i);
 }
