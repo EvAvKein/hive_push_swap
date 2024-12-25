@@ -6,7 +6,7 @@
 #    By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 09:31:47 by ekeinan           #+#    #+#              #
-#    Updated: 2024/12/21 18:47:27 by ekeinan          ###   ########.fr        #
+#    Updated: 2024/12/25 20:44:46 by ekeinan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,17 @@ NAME = push_swap
 LIBFT_DIR = libft_full
 LIBFT_LIB = libft_full.a
 
-SRC_CORE = utils.c \
-		   checks.c \
+SRC_CORE = main.c \
 		   args_to_list.c \
 		   args_dupe_check.c \
-		   main.c \
+		   utils.c \
+		   turks.c \
+		   checks.c \
+		   rotational_checks.c \
+		   rotational_actions.c \
+		   rotate.c \
 		   swap.c \
-		   push.c \
-		   rotate.c
+		   push.c
 
 COMPILE_FLAGS = -Wall -Wextra -Werror
 
