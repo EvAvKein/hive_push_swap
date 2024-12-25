@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/23 17:08:16 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/25 20:54:41 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft_full/libft_full.h"
+# include "stdbool.h"
 
 // The structure of each element in the stack
 typedef struct s_elem
@@ -23,14 +24,20 @@ typedef struct s_elem
 	struct s_elem	*next;
 }					t_elem;
 
+// DEBUGGING
+void	print_stack(t_elem **stack, char name);
+
 // Convert args to a linked list where each element is the above struct
 t_elem	*args_to_list(int argc, char **argv);
 
 // Scan list for duplicate values and return boolean accordingly
-int		args_dupe_check(t_elem **stack);
+bool	args_dupe_check(t_elem **stack);
 
 // Free and delete entire stack
 void	*stack_clear(t_elem **stack);
+
+// Execute the entire Turks sorting algorithm
+void	turks(t_elem **stack_a, t_elem **stack_b);
 
 // Swap the first 2 elements at the top of the stack
 void	swap(t_elem **stack, char name);
@@ -47,7 +54,34 @@ void	rotate_both(t_elem **stack1, t_elem **stack2);
 void	rev_rotate(t_elem **stack, char name);
 void	rev_rotate_both(t_elem **stack1, t_elem **stack2);
 
-// Boolean about whether the stack is sorted
-int		is_sorted(t_elem **stack);
+// Return whether the stack is sorted
+bool	is_sorted(t_elem **stack);
+
+// Return the size of the stack
+size_t	size(t_elem **stack);
+
+// Return the index of the number inside the stack
+size_t	num_index(t_elem **stack, int num);
+
+// Return the index where the new item should be inserted to be sorted
+size_t	index_for_prepend(t_elem **stack, int new, bool descending);
+
+// Assign the smallest and largest ints in stack to the int pointers
+void	smallest_and_largest(t_elem **stack, int *smallest, int *largest);
+
+// Return the number of rotations needed to reach the num
+// The by_bool variant uses the final arg to determine whether both reverse
+// The by_index variant uses the final arg to determine which one reverses
+size_t	i_of_rotates_rev_by_bool(
+		t_elem **stack_a, t_elem **stack_b, int num, bool rev_bool);
+size_t	i_of_rotates_rev_by_index(
+		t_elem **stack_a, t_elem **stack_b, int num, bool rev_arg_i);
+
+// Return the least amount of rotations necessary for a worthwhile push
+size_t	find_cheapest_rotation(
+		t_elem **stack_a, t_elem **stack_b, bool push_arg_i);
+
+// Execute the cheapest rotation possible for a worthwhile push
+void	do_cheapest_rotation(t_elem **stack_a, t_elem **stack_b, bool push_arg_i);
 
 #endif
