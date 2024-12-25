@@ -6,13 +6,13 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 13:38:20 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/19 12:11:10 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/25 13:46:36 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	args_dupe_check(t_elem **stack)
+bool	args_dupe_check(t_elem **stack)
 {
 	t_elem	*initial;
 	t_elem	*current;
