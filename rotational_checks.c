@@ -6,71 +6,89 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:44:58 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/25 21:11:45 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/28 21:03:09 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	i_of_rotates_rev_by_bool(
-		t_elem **stack_a, t_elem **stack_b, int num, bool rev_bool)
+static size_t	rotations_both_until_pushworthy(
+		t_elem **src, t_elem **dest, int num, int rev_and_push_bools)
 {
 	size_t	i;
-	size_t	i_prepend_b;
+	size_t	i_prepend;
 	size_t	i_num;
-	size_t	size_a;
+	size_t	size_src;
 
-	if (rev_bool)
+	if (rev_and_push_bools >> 1)
 	{
 		i = 0;
-		i_prepend_b = index_for_prepend(stack_b, num, 1);
-		size_a = size(stack_a);
-		i_num = num_index(stack_a, num);
-		if (i_prepend_b)
-			i = size(stack_b) - i_prepend_b;
-		if (i_num && (i < (size_a - i_num)))
-			i = size_a - i_num;
+		i_prepend = index_for_prepend(dest, num, rev_and_push_bools & 1);
+		i_num = num_index(src, num);
+		size_src = size(src);
+		if (i_prepend)
+			i = size(dest) - i_prepend;
+		if (i_num && (i < (size_src - i_num)))
+			i = size_src - i_num;
 	}
 	else
 	{
-		i = index_for_prepend(stack_b, num, 1);
-		i_num = num_index(stack_a, num);
+		i = index_for_prepend(dest, num, rev_and_push_bools & 1);
+		i_num = num_index(src, num);
 		if (i < i_num)
 			i = i_num;
 	}
 	return (i);
 }
 
-size_t	i_of_rotates_rev_by_index(
-		t_elem **stack_a, t_elem **stack_b, int num, bool rev_arg_i)
+size_t	rotations_rev_by_bool(
+		t_elem **stack_a, t_elem **stack_b, int num, int rev_and_push_bools)
+{
+	if (rev_and_push_bools & 1)
+		return (rotations_both_until_pushworthy(
+					stack_a, stack_b, num, rev_and_push_bools));
+	else
+		return (rotations_both_until_pushworthy(
+					stack_b, stack_a, num, rev_and_push_bools));
+}
+
+static size_t	rotations_counter_until_pushworthy(
+		t_elem **src, t_elem **dest, int num, int rev_and_push_bools)
 {
 	size_t	i;
 	size_t	i_num;
 	size_t	i_prepend;
 
 	i = 0;
-	if (rev_arg_i)
+	if (rev_and_push_bools >> 1)
 	{
-//		ft_printf("case 0\n");
-		i_prepend = index_for_prepend(stack_b, num, 1);
-//		ft_printf("case 1\n");
+		i_prepend = index_for_prepend(dest, num, rev_and_push_bools & 1);
 		if (i_prepend)
-			i = size(stack_b) - i_prepend;
-//		ft_printf("case 2\n");
-		i = i + index_for_prepend(stack_a, num, 1);
-//		ft_printf("case 3\n");
-		return (i);
+			i = size(dest) - i_prepend;
+		i = i + index_for_prepend(src, num, rev_and_push_bools & 1);
 	}
 	else
 	{
-		i_num = num_index(stack_a, num);
+		i_num = num_index(src, num);
 		if (i_num)
-			i = size(stack_a) - i_num;
-		i = i + index_for_prepend(stack_b, num, 1);
-		return (i);
+			i = size(src) - i_num;
+		i = i + index_for_prepend(dest, num, rev_and_push_bools & 1);
 	}
+	return (i);
 }
 
+size_t	rotations_counter_by_index(
+		t_elem **stack_a, t_elem **stack_b, int num, int rev_and_push_bools)
+{
+	if (rev_and_push_bools & 1)
+		return (rotations_counter_until_pushworthy(
+					stack_a, stack_b, num, rev_and_push_bools));
+	else
+		return (rotations_counter_until_pushworthy(
+					stack_b, stack_a, num, rev_and_push_bools));
+}
+
+/*
 static size_t	cheapest_rotation(
 		t_elem **stack_a, t_elem **stack_b, int num, size_t cheapest_before)
 {
@@ -97,26 +115,33 @@ static size_t	cheapest_rotation(
 //	ft_printf("cheapest 4 = %i\n", cheapest);
 	return (cheapest);
 }
+*/
 
 size_t	find_cheapest_rotation(
 		t_elem **stack_a, t_elem **stack_b, bool push_arg_i)
 {
 	t_elem	*initial;
 	t_elem	*current;
-	size_t	cheapest;
+	ssize_t	cheapest;
+	ssize_t	count;
 
 	if (push_arg_i)
 		initial = *stack_b;
 	else
 		initial = *stack_a;
-	cheapest = i_of_rotates_rev_by_bool(stack_a, stack_b, initial->num, 1);
-//	ft_printf("past first\n");
-	cheapest = cheapest_rotation(stack_a, stack_b, initial->num, cheapest);
-//	ft_printf("past second\n");
-	current = initial->next;
-	while (current != initial)
+	cheapest = rotations_rev_by_bool(stack_a, stack_b, initial->num, push_arg_i);
+	current = initial;
+	count = -1;
+	while ((count < 0) || (current != initial))
 	{
-		cheapest = cheapest_rotation(stack_a, stack_b, initial->num, cheapest);
+		set_if_lower(&cheapest,
+				rotations_rev_by_bool(stack_a, stack_b, current->num, push_arg_i));
+		set_if_lower(&cheapest,
+				rotations_rev_by_bool(stack_a, stack_b, current->num, 2 | push_arg_i));
+		set_if_lower(&cheapest,
+				rotations_counter_by_index(stack_a, stack_b, current->num, push_arg_i));
+		set_if_lower(&cheapest,
+				rotations_counter_by_index(stack_a, stack_b, current->num, 2 | push_arg_i));
 		current = current->next;
 	}
 	return (cheapest);

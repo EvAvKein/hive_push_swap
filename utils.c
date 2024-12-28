@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:02:03 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/25 21:13:47 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/28 20:52:27 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ size_t	num_index(t_elem **stack, int num)
 		current = current->next;
 		i++;
 	}
-/*	if (current->num != num)
-	{
-		ft_printf("BUG: Looking for num index in a stack without it\n");
-		return (0);
-	}
-*/
 	return (i);
+}
+
+void	set_if_lower(ssize_t *lowest, ssize_t new)
+{
+	if (new < *lowest)
+		*lowest = new;
 }

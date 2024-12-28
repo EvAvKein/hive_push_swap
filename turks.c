@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:36:26 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/25 21:24:21 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/28 16:27:59 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,31 @@ static void	turks_init(t_elem **stack_a, t_elem **stack_b, size_t length)
 		if (is_sorted(stack_b))
 			rotate(stack_b, 'b');
 	}
-	if (!is_sorted(stack_a))
+	if (length <= 5 && !is_sorted(stack_a))
 		sort_up_to_three(stack_a, 'a');
 }
 
 static void	turks_migration(t_elem **stack_a, t_elem **stack_b, bool dest_arg_i)
 {
 	t_elem	**migr_src;
+	t_elem	**migr_dest;
 
 	if (dest_arg_i)
+	{
 		migr_src = stack_a;
+		migr_dest = stack_b;
+	}
 	else
+	{
 		migr_src = stack_b;
+		migr_dest = stack_a;
+	}
 	while (*migr_src)
 	{
 		if (dest_arg_i && (((*stack_a)->next->next == (*stack_a)->prev) || is_sorted(stack_a)))
 			break ;
-//		ft_printf("migrating...\n");
 		do_cheapest_rotation(stack_a, stack_b, dest_arg_i);
-//		ft_printf("rotated...\n");
-		if (dest_arg_i)
-			push(stack_a, stack_b, 'b');
-		else
-			push(stack_b, stack_a, 'a');
-//		ft_printf("pushed...\n");
+		push(migr_src, migr_dest, 'a' + dest_arg_i);
 	}
 }
 
@@ -105,10 +106,9 @@ void	turks(t_elem **stack_a, t_elem **stack_b)
 		return ;
 	}
 	turks_init(stack_a, stack_b, length);
-//	ft_printf("migration 1\n");
 	turks_migration(stack_a, stack_b, 1);
-//	ft_printf("migration 2\n");
+	if (!is_sorted(stack_a))
+		sort_up_to_three(stack_a, 'a');
 	turks_migration(stack_a, stack_b, 0);
-//	ft_printf("turks over\n");
 	turks_final_a_rotation(stack_a);
 }

@@ -6,7 +6,7 @@
 #    By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 09:31:47 by ekeinan           #+#    #+#              #
-#    Updated: 2024/12/25 20:44:46 by ekeinan          ###   ########.fr        #
+#    Updated: 2024/12/28 16:38:27 by ekeinan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ all: $(NAME)
 
 $(NAME):
 	@cd $(LIBFT_DIR) && make --no-print-directory
-	cc $(COMPILE_FLAGS) $(SRC_CORE) $(LIBFT_DIR)/$(LIBFT_LIB) -o $(NAME)
+	cc $(COMPILE_FLAGS) $(SRC_CORE) $(LIBFT_DIR)/$(LIBFT_LIB) -o $(NAME) -g
 
 clean:
 	@cd $(LIBFT_DIR) && make $@ --no-print-directory
