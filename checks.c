@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:58:17 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/28 19:22:36 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/29 20:19:08 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,53 +47,55 @@ size_t	size(t_elem **stack)
 	return (size);
 }
 
-void	smallest_and_largest(t_elem **stack, int *smallest, int *largest)
+void	smallest_largest_and_size(t_elem **stack, int *smallest, int *largest, size_t *size)
 {
 	t_elem	*initial;
 	t_elem	*current;
+	size_t	counter;
 
 	initial = *stack;
 	current = initial;
-	if (smallest)
-		*smallest = initial->num;
-	if (largest)
-		*largest = initial->num;
+	*smallest = initial->num;
+	*largest = initial->num;
+	counter = 1;
 	while (current->next != initial)
 	{
 		current = current->next;
-		if (smallest && current->num < *smallest)
+		if (current->num < *smallest)
 			*smallest = current->num;
-		if (largest && current->num > *largest)
+		if (current->num > *largest)
 			*largest = current->num;
+		counter++;
 	}
+	*size = counter;
 }
 
 size_t	index_for_prepend(t_elem **stack, int new, bool descending)
 {
-	int		smallest;
-	int		largest;
-	t_elem	*initial;
-	t_elem	*current;
-	size_t	i;
+	long long	sm_and_lg;
+	size_t		size;
+	t_elem		*initial;
+	t_elem		*current;
+	size_t		i;
 
 	initial = *stack;
-	smallest_and_largest(stack, &smallest, &largest);
-	if (new > largest)
-		return ((num_index(stack, largest) + !descending) % size(stack));
-	if (new < smallest)
-		return ((num_index(stack, smallest) + descending) % size(stack));
+	smallest_largest_and_size(stack, (int*)&sm_and_lg, (int*)(&sm_and_lg) + 1, &size);
+	if (new > (sm_and_lg >> sizeof(int) * 8))
+		return (num_index(stack, (sm_and_lg >> ((sizeof(int) * 8))) + !descending) % size);
+	if (new < (sm_and_lg & INT_MAX))
+		return (num_index(stack, (int)(sm_and_lg & INT_MAX) + descending) % size);
 	current = initial;
 	i = 0;
 	while (!i || (current != initial))
 	{
 		if (descending && ((new < current->num)
-			|| (new > current->next->num)))
-			return ((i + 1) % size(stack));
+			&& (new > current->next->num)))
+			return ((i + 1) % size);
 		if (!descending && ((new > current->num)
-			|| (new < current->prev->num)))
-			return ((i - 1) % size(stack));	
+			&& (new < current->next->num)))
+			return ((i + 1) % size);
 		current = current->next;
 		i++;
 	}
-	return (i);
+	return (0);
 }

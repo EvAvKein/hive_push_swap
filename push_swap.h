@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/28 20:58:49 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/29 19:11:00 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft_full/libft_full.h"
 # include "stdbool.h"
+# include "limits.h"
 
 // The structure of each element in the stack
 typedef struct s_elem
@@ -67,7 +68,7 @@ size_t	num_index(t_elem **stack, int num);
 size_t	index_for_prepend(t_elem **stack, int new, bool descending);
 
 // Assign the smallest and largest ints in stack to the int pointers
-void	smallest_and_largest(t_elem **stack, int *smallest, int *largest);
+void	smallest_largest_and_size(t_elem **stack, int *smallest, int *largest, size_t *size);
 
 // Return the number of rotations needed to reach the num
 // The by_bool variant uses the final arg to determine whether both reverse

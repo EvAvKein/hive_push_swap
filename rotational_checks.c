@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:44:58 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/28 21:03:09 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/29 15:31:02 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,51 +88,22 @@ size_t	rotations_counter_by_index(
 					stack_b, stack_a, num, rev_and_push_bools));
 }
 
-/*
-static size_t	cheapest_rotation(
-		t_elem **stack_a, t_elem **stack_b, int num, size_t cheapest_before)
-{
-	size_t	cheapest;
-	size_t	count;
-
-	cheapest = cheapest_before;
-//	ft_printf("cheapest 0 = %i (num = %i)\n", cheapest, num);
-	count = i_of_rotates_rev_by_bool(stack_a, stack_b, num, 0);
-	if (count < cheapest)
-		cheapest = count;
-//	ft_printf("cheapest 1 = %i\n", cheapest);
-	count = i_of_rotates_rev_by_bool(stack_a, stack_b, num, 1);
-	if (count < cheapest)
-		cheapest = count;
-//	ft_printf("cheapest 2 = %i\n", cheapest);
-	count = i_of_rotates_rev_by_index(stack_a, stack_b, num, 0);
-	if (count < cheapest)
-		cheapest = count;
-//	ft_printf("cheapest 3 = %i\n", cheapest);
-	count = i_of_rotates_rev_by_index(stack_a, stack_b, num, 1);
-	if (count < cheapest)
-		cheapest = count;
-//	ft_printf("cheapest 4 = %i\n", cheapest);
-	return (cheapest);
-}
-*/
-
 size_t	find_cheapest_rotation(
 		t_elem **stack_a, t_elem **stack_b, bool push_arg_i)
 {
 	t_elem	*initial;
 	t_elem	*current;
 	ssize_t	cheapest;
-	ssize_t	count;
+	bool	first_check;
 
 	if (push_arg_i)
-		initial = *stack_b;
-	else
 		initial = *stack_a;
+	else
+		initial = *stack_b;
 	cheapest = rotations_rev_by_bool(stack_a, stack_b, initial->num, push_arg_i);
 	current = initial;
-	count = -1;
-	while ((count < 0) || (current != initial))
+	first_check = 1;
+	while (first_check || (current != initial))
 	{
 		set_if_lower(&cheapest,
 				rotations_rev_by_bool(stack_a, stack_b, current->num, push_arg_i));
@@ -143,6 +114,7 @@ size_t	find_cheapest_rotation(
 		set_if_lower(&cheapest,
 				rotations_counter_by_index(stack_a, stack_b, current->num, 2 | push_arg_i));
 		current = current->next;
+		first_check = 0;
 	}
 	return (cheapest);
 }

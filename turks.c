@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:36:26 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/28 16:27:59 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/29 19:09:20 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ static void sort_up_to_three(t_elem **stack, char name)
 {
 	int		smallest;
 	int		largest;
+	size_t	size;
 
-	if (size(stack) == 2)
+	smallest_largest_and_size(stack, &smallest, &largest, &size);
+	if (size == 2)
 		return (rotate(stack, name));
-	smallest_and_largest(stack, &smallest, &largest);
 	if ((*stack)->num == largest)
 	{
 		rotate(stack, name);
@@ -81,9 +82,10 @@ static void	turks_final_a_rotation(t_elem **stack_a)
 {
 	int		smallest;
 	int		largest;
+	size_t	size;
 
-	smallest_and_largest(stack_a, &smallest, &largest);
-	if (num_index(stack_a, smallest) < (size(stack_a) / 2))
+	smallest_largest_and_size(stack_a, &smallest, &largest, &size);
+	if (num_index(stack_a, smallest) < (size / 2))
 	{
 		while ((*stack_a)->num != smallest)
 			rotate(stack_a, 'a');
