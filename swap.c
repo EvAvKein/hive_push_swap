@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:54:21 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/24 20:53:53 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:10:20 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@
 // 2 1 3 4 5
 void	swap(t_elem **stack, char name)
 {
-	if (!stack || !*stack || (*stack)->next == *stack)
-	{
-		ft_printf("BUG: Attempted swap in %c with less than 2\n", name);
-		return ;
-	}
 	if ((*stack)->next->next == *stack)
 		*stack = (*stack)->next;
 	else

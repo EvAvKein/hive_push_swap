@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:36:26 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/29 19:09:20 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:20:06 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void sort_up_to_three(t_elem **stack, char name)
 	int		largest;
 	size_t	size;
 
-	smallest_largest_and_size(stack, &smallest, &largest, &size);
+	sm_lg_and_size(stack, &smallest, &largest, &size);
 	if (size == 2)
 		return (rotate(stack, name));
 	if ((*stack)->num == largest)
@@ -73,7 +73,9 @@ static void	turks_migration(t_elem **stack_a, t_elem **stack_b, bool dest_arg_i)
 	{
 		if (dest_arg_i && (((*stack_a)->next->next == (*stack_a)->prev) || is_sorted(stack_a)))
 			break ;
+		print_stacks(stack_a, 'a', stack_b, 'b');
 		do_cheapest_rotation(stack_a, stack_b, dest_arg_i);
+		print_stacks(stack_a, 'a', stack_b, 'b');
 		push(migr_src, migr_dest, 'a' + dest_arg_i);
 	}
 }
@@ -84,8 +86,8 @@ static void	turks_final_a_rotation(t_elem **stack_a)
 	int		largest;
 	size_t	size;
 
-	smallest_largest_and_size(stack_a, &smallest, &largest, &size);
-	if (num_index(stack_a, smallest) < (size / 2))
+	sm_lg_and_size(stack_a, &smallest, &largest, &size);
+	if (num_i(stack_a, smallest) < (size / 2))
 	{
 		while ((*stack_a)->num != smallest)
 			rotate(stack_a, 'a');
@@ -111,6 +113,8 @@ void	turks(t_elem **stack_a, t_elem **stack_b)
 	turks_migration(stack_a, stack_b, 1);
 	if (!is_sorted(stack_a))
 		sort_up_to_three(stack_a, 'a');
+//	print_stacks(stack_a, 'a', stack_b, 'b');
 	turks_migration(stack_a, stack_b, 0);
 	turks_final_a_rotation(stack_a);
+	print_stacks(stack_a, 'a', stack_b, 'b');
 }

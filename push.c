@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:09:15 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/18 15:25:26 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:08:56 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ static void	push_operation(t_elem **stack1, t_elem **stack2)
 
 void	push(t_elem **stack1, t_elem **stack2, char stack2_name)
 {
-	if (!stack1 || !*stack1)
-	{
-		ft_printf("BUG: Attempted push from empty stack: %c\n", stack2_name);
-		return ;
-	}
 	push_operation(stack1, stack2);
 	ft_printf("p%c\n", stack2_name);
 }

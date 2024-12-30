@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:33:50 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/29 19:12:31 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/30 11:25:02 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	print_stack(t_elem **stack, char name)
 	if (!stack || !*stack)
 	{
 		ft_printf("Stack %c empty\n", name);
-		ft_printf("---\n");
 		return ;
 	}
 	ft_printf("Stack %c:\n", name);
@@ -60,7 +59,6 @@ int	main(int argc, char **argv)
 	if (is_sorted(&stack_a))
 		return (0);
 	turks(&stack_a, &stack_b);
-	print_stacks(&stack_a, 'a', &stack_b, 'b');
 	stack_clear(&stack_a);
 	stack_clear(&stack_b);
 	return (0);

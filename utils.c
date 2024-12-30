@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:02:03 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/28 20:52:27 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:00:02 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*stack_clear(t_elem **elem)
 	return (NULL);
 }
 
-size_t	num_index(t_elem **stack, int num)
+size_t	num_i(t_elem **stack, int num)
 {
 	t_elem	*initial;
 	t_elem	*current;
