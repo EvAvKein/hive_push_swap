@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/29 19:11:00 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/30 19:58:28 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_elem
 
 // DEBUGGING
 void	print_stack(t_elem **stack, char name);
+void	print_stacks(t_elem **stack1, char name1, t_elem **stack2, char name2);
 
 // Convert args to a linked list where each element is the above struct
 t_elem	*args_to_list(int argc, char **argv);
@@ -62,13 +63,13 @@ bool	is_sorted(t_elem **stack);
 size_t	size(t_elem **stack);
 
 // Return the index of the number inside the stack
-size_t	num_index(t_elem **stack, int num);
+size_t	num_i(t_elem **stack, int num);
 
 // Return the index where the new number should be prepended to be sorted
 size_t	index_for_prepend(t_elem **stack, int new, bool descending);
 
 // Assign the smallest and largest ints in stack to the int pointers
-void	smallest_largest_and_size(t_elem **stack, int *smallest, int *largest, size_t *size);
+void	sm_lg_and_size(t_elem **stack, int *smallest, int *largest, size_t *size);
 
 // Return the number of rotations needed to reach the num
 // The by_bool variant uses the final arg to determine whether both reverse
