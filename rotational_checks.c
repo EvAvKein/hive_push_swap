@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:44:58 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/30 19:59:08 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 13:40:54 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ static size_t	rotations_counter_until_pushworthy(
 		i_prepend = index_for_prepend(dest, num, rev_and_push_bools & 1);
 		if (i_prepend)
 			i = size(dest) - i_prepend;
-		i = i + index_for_prepend(src, num, rev_and_push_bools & 1);
+		i += num_i(src, num);
 	}
 	else
 	{
 		i_num = num_i(src, num);
 		if (i_num)
 			i = size(src) - i_num;
-		i = i + index_for_prepend(dest, num, rev_and_push_bools & 1);
+		i += index_for_prepend(dest, num, rev_and_push_bools & 1);
 	}
 	return (i);
 }
