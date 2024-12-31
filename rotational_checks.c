@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:44:58 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 13:40:54 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 20:17:53 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ size_t	rotations_rev_by_bool(
 {
 	if (rev_and_push_bools & 1)
 		return (rotations_both_until_pushworthy(
-					stack_a, stack_b, num, rev_and_push_bools));
+				stack_a, stack_b, num, rev_and_push_bools));
 	else
 		return (rotations_both_until_pushworthy(
-					stack_b, stack_a, num, rev_and_push_bools));
+				stack_b, stack_a, num, rev_and_push_bools));
 }
 
 static size_t	rotations_counter_until_pushworthy(
@@ -82,37 +82,36 @@ size_t	rotations_counter_by_index(
 {
 	if (rev_and_push_bools & 1)
 		return (rotations_counter_until_pushworthy(
-					stack_a, stack_b, num, rev_and_push_bools));
+				stack_a, stack_b, num, rev_and_push_bools));
 	else
 		return (rotations_counter_until_pushworthy(
-					stack_b, stack_a, num, rev_and_push_bools));
+				stack_b, stack_a, num, rev_and_push_bools));
 }
 
 size_t	find_cheapest_rotation(
-		t_elem **stack_a, t_elem **stack_b, bool push_arg_i)
+		t_elem **a, t_elem **b, bool push_arg_i)
 {
 	t_elem	*initial;
 	t_elem	*current;
 	ssize_t	cheapest;
 	bool	first_check;
 
+	initial = *b;
 	if (push_arg_i)
-		initial = *stack_a;
-	else
-		initial = *stack_b;
-	cheapest = rotations_rev_by_bool(stack_a, stack_b, initial->num, push_arg_i);
+		initial = *a;
+	cheapest = rotations_rev_by_bool(a, b, initial->num, push_arg_i);
 	current = initial;
 	first_check = 1;
 	while (first_check || (current != initial))
 	{
-		set_if_lower(&cheapest,
-				rotations_rev_by_bool(stack_a, stack_b, current->num, push_arg_i));
-		set_if_lower(&cheapest,
-				rotations_rev_by_bool(stack_a, stack_b, current->num, 2 | push_arg_i));
-		set_if_lower(&cheapest,
-				rotations_counter_by_index(stack_a, stack_b, current->num, push_arg_i));
-		set_if_lower(&cheapest,
-				rotations_counter_by_index(stack_a, stack_b, current->num, 2 | push_arg_i));
+		set_if_lower(&cheapest, rotations_rev_by_bool(
+				a, b, current->num, push_arg_i));
+		set_if_lower(&cheapest, rotations_rev_by_bool(
+				a, b, current->num, 2 | push_arg_i));
+		set_if_lower(&cheapest, rotations_counter_by_index(
+				a, b, current->num, push_arg_i));
+		set_if_lower(&cheapest, rotations_counter_by_index(
+				a, b, current->num, 2 | push_arg_i));
 		current = current->next;
 		first_check = 0;
 	}

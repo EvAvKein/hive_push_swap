@@ -6,13 +6,13 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:36:26 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 19:18:15 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 20:23:12 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void sort_up_to_three(t_elem **stack, char name)
+static void	sort_up_to_three(t_elem **stack, char name)
 {
 	int		smallest;
 	int		largest;
@@ -71,7 +71,8 @@ static void	turks_migration(t_elem **stack_a, t_elem **stack_b, bool dest_arg_i)
 	}
 	while (*migr_src)
 	{
-		if (dest_arg_i && (is_sorted(stack_a) || ((*stack_a)->next->next == (*stack_a)->prev)))
+		if (dest_arg_i && (((*stack_a)->next->next == (*stack_a)->prev)
+				|| is_sorted(stack_a)))
 			break ;
 		do_cheapest_rotation(stack_a, stack_b, dest_arg_i);
 		push(migr_src, migr_dest, 'a' + dest_arg_i);
@@ -94,7 +95,7 @@ static void	turks_final_a_rotation(t_elem **stack_a)
 	{
 		while ((*stack_a)->num != smallest)
 			rev_rotate(stack_a, 'a');
-	}	
+	}
 }
 
 void	turks(t_elem **stack_a, t_elem **stack_b)

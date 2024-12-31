@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:43 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 18:49:13 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 19:42:33 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	rotate_both_until_pushworthy(
 		t_elem **src, t_elem **dest, int num, int rev_and_push_bools)
 {
-	void(*rotate_single)(t_elem **stack, char name);
-	void(*rotate_double)(t_elem **stack1, t_elem **stack2);
+	void	(*rotate_single)(t_elem **stack, char name);
+	void	(*rotate_double)(t_elem **stack1, t_elem **stack2);
 
 	if (rev_and_push_bools >> 1)
 	{
@@ -29,7 +29,7 @@ static void	rotate_both_until_pushworthy(
 		rotate_double = rotate_both;
 	}
 	while ((*src)->num != num
-			&& index_for_prepend(dest, num, rev_and_push_bools & 1))
+		&& index_for_prepend(dest, num, rev_and_push_bools & 1))
 		rotate_double(src, dest);
 	while (index_for_prepend(dest, num, rev_and_push_bools & 1))
 		rotate_single(dest, 'a' + (rev_and_push_bools & 1));
@@ -50,8 +50,8 @@ static bool	rotate_rev_by_bool(
 static void	rotate_counter_until_pushworthy(
 		t_elem **src, t_elem **dest, int num, int counter_and_push_bools)
 {
-	void(*rotate_src)(t_elem **stack, char name);
-	void(*rotate_dest)(t_elem **stack1, char name);
+	void	(*rotate_src)(t_elem **stack, char name);
+	void	(*rotate_dest)(t_elem **stack1, char name);
 
 	if (counter_and_push_bools >> 1)
 	{
@@ -74,10 +74,10 @@ static bool	rotate_counter_by_index(
 {
 	if (counter_and_push_bools & 1)
 		rotate_counter_until_pushworthy(
-				stack_a, stack_b, num, counter_and_push_bools);
+			stack_a, stack_b, num, counter_and_push_bools);
 	else
 		rotate_counter_until_pushworthy(
-				stack_b, stack_a, num, counter_and_push_bools);
+			stack_b, stack_a, num, counter_and_push_bools);
 	return (1);
 }
 
@@ -90,20 +90,21 @@ void	do_cheapest_rotation(t_elem **a, t_elem **b, bool push_arg_i)
 
 	rotated = 0;
 	cheapest = find_cheapest_rotation(a, b, push_arg_i);
+	elem = *b;
 	if (push_arg_i)
 		elem = *a;
-	else
-		elem = *b;
 	while (!rotated)
 	{
 		if (cheapest == rotations_rev_by_bool(a, b, elem->num, push_arg_i))
 			rotated = rotate_rev_by_bool(a, b, elem->num, push_arg_i);
-		else if (cheapest == rotations_rev_by_bool(a, b, elem->num, 2 | push_arg_i))
+		else if (cheapest == rotations_rev_by_bool(
+				a, b, elem->num, 2 | push_arg_i))
 			rotated = rotate_rev_by_bool(a, b, elem->num, 2 | push_arg_i);
-		else if (cheapest == rotations_counter_by_index(a, b, elem->num, push_arg_i))
+		else if (cheapest == rotations_counter_by_index(
+				a, b, elem->num, push_arg_i))
 			rotated = rotate_counter_by_index(a, b, elem->num, push_arg_i);
 		else if (cheapest == rotations_counter_by_index(
-					a, b, elem->num, 2 | push_arg_i))
+				a, b, elem->num, 2 | push_arg_i))
 			rotated = rotate_counter_by_index(a, b, elem->num, 2 | push_arg_i);
 		else
 			elem = elem->next;

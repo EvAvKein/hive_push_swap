@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/30 19:58:28 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 20:21:13 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,26 @@ size_t	num_i(t_elem **stack, int num);
 size_t	index_for_prepend(t_elem **stack, int new, bool descending);
 
 // Assign the smallest and largest ints in stack to the int pointers
-void	sm_lg_and_size(t_elem **stack, int *smallest, int *largest, size_t *size);
+void	sm_lg_and_size(
+			t_elem **stack, int *smallest, int *largest, size_t *size);
 
 // Return the number of rotations needed to reach the num
 // The by_bool variant uses the final arg to determine whether both reverse
 // The by_index variant uses the final arg to determine which one reverses
-size_t	rotations_rev_by_bool(
-		t_elem **stack_a, t_elem **stack_b, int num, int rev_and_push_bools);
-size_t	rotations_counter_by_index(
-		t_elem **stack_a, t_elem **stack_b, int num, int rev_and_push_bools);
+size_t	rotations_rev_by_bool(t_elem **stack_a, t_elem **stack_b,
+			int num, int rev_and_push_bools);
+size_t	rotations_counter_by_index(t_elem **stack_a, t_elem **stack_b,
+			int num, int rev_and_push_bools);
 
 // Return the least amount of rotations necessary for a worthwhile push
-size_t	find_cheapest_rotation(
-		t_elem **stack_a, t_elem **stack_b, bool push_arg_i);
+size_t	find_cheapest_rotation(t_elem **stack_a, t_elem **stack_b,
+			bool push_arg_i);
 
 // If new is lower than lowest, set lowest to new (created due to norm)
-void    set_if_lower(ssize_t *lowest, ssize_t new);
+void	set_if_lower(ssize_t *lowest, ssize_t new);
 
 // Execute the cheapest rotation possible for a worthwhile push
-void	do_cheapest_rotation(t_elem **stack_a, t_elem **stack_b, bool push_arg_i);
+void	do_cheapest_rotation(t_elem **stack_a, t_elem **stack_b,
+			bool push_arg_i);
 
 #endif
