@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 21:09:31 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 21:10:54 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ void	turks(t_elem **stack_a, t_elem **stack_b);
 
 // Swap the first 2 elements at the top of the stack
 void	swap(t_elem **stack, char name);
-void	swap_both(t_elem **stack1, t_elem **stack2);
+void	swap_both(t_elem **stack1, t_elem **stack2, bool print);
 
 // Take the first element at the top of stack1 and put it at the top of stack2
 void	push(t_elem **stack1, t_elem **stack2, char stack2_name);
 
 // Shift up all elements of the stack by 1 (first element becomes the last)
 void	rotate(t_elem **stack, char name);
-void	rotate_both(t_elem **stack1, t_elem **stack2);
+void	rotate_both(t_elem **stack1, t_elem **stack2, bool print);
 
 // Shift down all elements of the stack by 1 (last element becomes the first)
 void	rev_rotate(t_elem **stack, char name);
-void	rev_rotate_both(t_elem **stack1, t_elem **stack2);
+void	rev_rotate_both(t_elem **stack1, t_elem **stack2, bool print);
 
 // Return whether the stack is sorted
 bool	is_sorted(t_elem **stack);

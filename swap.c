@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:54:21 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/30 20:10:20 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 20:34:40 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ void	swap(t_elem **stack, char name)
 		ft_printf("s%c\n", name);
 }
 
-void	swap_both(t_elem **stack1, t_elem **stack2)
+void	swap_both(t_elem **stack1, t_elem **stack2, bool print)
 {
 	swap(stack1, '\0');
 	swap(stack2, '\0');
-	ft_printf("ss\n");
+	if (print)
+		ft_printf("ss\n");
 }

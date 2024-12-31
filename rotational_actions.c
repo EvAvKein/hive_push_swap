@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:43 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 19:42:33 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 20:41:27 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	rotate_both_until_pushworthy(
 		t_elem **src, t_elem **dest, int num, int rev_and_push_bools)
 {
 	void	(*rotate_single)(t_elem **stack, char name);
-	void	(*rotate_double)(t_elem **stack1, t_elem **stack2);
+	void	(*rotate_double)(t_elem **stack1, t_elem **stack2, bool print);
 
 	if (rev_and_push_bools >> 1)
 	{
@@ -30,7 +30,7 @@ static void	rotate_both_until_pushworthy(
 	}
 	while ((*src)->num != num
 		&& index_for_prepend(dest, num, rev_and_push_bools & 1))
-		rotate_double(src, dest);
+		rotate_double(src, dest, 1);
 	while (index_for_prepend(dest, num, rev_and_push_bools & 1))
 		rotate_single(dest, 'a' + (rev_and_push_bools & 1));
 	while ((*src)->num != num)
@@ -81,7 +81,6 @@ static bool	rotate_counter_by_index(
 	return (1);
 }
 
-// params shortened to 'a' & 'b' to stay under norm's 80 chars per line
 void	do_cheapest_rotation(t_elem **a, t_elem **b, bool push_arg_i)
 {
 	size_t	cheapest;

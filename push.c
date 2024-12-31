@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:09:15 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/30 20:08:56 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 20:39:52 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ static void	push_operation(t_elem **stack1, t_elem **stack2)
 void	push(t_elem **stack1, t_elem **stack2, char stack2_name)
 {
 	push_operation(stack1, stack2);
-	ft_printf("p%c\n", stack2_name);
+	if (stack2_name)
+		ft_printf("p%c\n", stack2_name);
 }
