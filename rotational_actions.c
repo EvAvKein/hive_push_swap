@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:43 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/28 21:04:54 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 18:49:13 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ static void	rotate_counter_until_pushworthy(
 
 	if (counter_and_push_bools >> 1)
 	{
-		rotate_src = rev_rotate;
-		rotate_dest = rotate;
+		rotate_src = rotate;
+		rotate_dest = rev_rotate;
 	}
 	else
 	{
-		rotate_src = rotate;
-		rotate_dest = rev_rotate;
+		rotate_src = rev_rotate;
+		rotate_dest = rotate;
 	}
 	while (index_for_prepend(dest, num, counter_and_push_bools & 1))
 		rotate_dest(dest, 'a' + (counter_and_push_bools & 1));
 	while ((*src)->num != num)
-		rotate_src(src, 'a' + (counter_and_push_bools & 1));
+		rotate_src(src, 'b' - (counter_and_push_bools & 1));
 }
 
 static bool	rotate_counter_by_index(
