@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:58:17 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 20:19:00 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 21:04:01 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ size_t	index_for_prepend(t_elem **stack, int new, bool descending)
 
 	initial = *stack;
 	sm_lg_and_size(stack, (int *)&sm_and_lg, (int *)(&sm_and_lg) + 1, &size);
-	if (new < (sm_and_lg & INT_MAX))
-		return ((num_i(stack, (int)(sm_and_lg & INT_MAX)) + descending) % size);
+	if (new < (sm_and_lg & -1u))
+		return ((num_i(stack, (int)(sm_and_lg & -1u)) + descending) % size);
 	if (new > (sm_and_lg >> sizeof(int) * 8))
 		return ((num_i(stack,
 					(sm_and_lg >> ((sizeof(int) * 8)))) + !descending) % size);

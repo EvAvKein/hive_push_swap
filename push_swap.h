@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 20:21:13 by ekeinan          ###   ########.fr       */
+/*   Updated: 2024/12/31 21:09:31 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft_full/libft_full.h"
 # include "stdbool.h"
-# include "limits.h"
 
 // The structure of each element in the stack
 typedef struct s_elem
