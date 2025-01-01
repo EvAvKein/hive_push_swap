@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:35:42 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/30 12:36:08 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/01 14:23:03 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_elem	*args_to_list(int argc, char **argv)
 	t_elem	*list;
 	size_t	len;
 
+	arg_arr = NULL;
 	if (argc < 2)
 		return (NULL);
 	if (ft_strchr(argv[1], ' '))
@@ -106,7 +107,9 @@ t_elem	*args_to_list(int argc, char **argv)
 		while (arg_arr[len])
 			len++;
 		list = arr_to_list(arg_arr, len);
-		free(arg_arr);
+		while (*arg_arr)
+			free(*(arg_arr++));
+		free(arg_arr - len);
 	}
 	else
 		list = arr_to_list(&argv[1], argc - 1);
