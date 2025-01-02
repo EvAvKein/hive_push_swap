@@ -6,40 +6,11 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:33:50 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/30 11:25:02 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/01 19:57:57 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	print_stack(t_elem **stack, char name)
-{
-	t_elem	*initial;
-
-	if (!stack || !*stack)
-	{
-		ft_printf("Stack %c empty\n", name);
-		return ;
-	}
-	ft_printf("Stack %c:\n", name);
-	initial = *stack;
-	ft_printf("%d\n", (*stack)->num);
-	*stack = (*stack)->next;
-	while (*stack != initial)
-	{
-		ft_printf("%d\n", (*stack)->num);
-		(*stack) = (*stack)->next;
-	}
-}
-
-void	print_stacks(t_elem **stack1, char name1, t_elem **stack2, char name2)
-{
-	ft_printf("---\n");
-	print_stack(stack1, name1);
-	ft_printf("---\n");
-	print_stack(stack2, name2);
-	ft_printf("---\n");
-}
 
 int	main(int argc, char **argv)
 {

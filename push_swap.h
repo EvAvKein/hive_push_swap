@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 21:10:54 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/01 19:57:45 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ typedef struct s_elem
 	int				num;
 	struct s_elem	*next;
 }					t_elem;
-
-// DEBUGGING
-void	print_stack(t_elem **stack, char name);
-void	print_stacks(t_elem **stack1, char name1, t_elem **stack2, char name2);
 
 // Convert args to a linked list where each element is the above struct
 t_elem	*args_to_list(int argc, char **argv);
