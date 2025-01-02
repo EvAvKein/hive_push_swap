@@ -36,13 +36,13 @@ The assignment is to make a program which sorts a given list of number, under th
 - To pass with 80/100 score, always sort 100 numbers in fewer than 700 operations.  
 To pass with 100/100 score, always sort 500 numbers in fewer than 5500 operations.  
 
-> The efficiency requirements are tight enough that earlier students gave up after months of trying to invent sufficient ones or adjust common ones.  
-> Our student cohort got recommended to pick between Radix Sort and the [Turks](https://medium.com/@ayogun/push-swap-c1f5d2d41e97) algorithm (the one I reimplemented) invented specifically for this assignment.
-
 In the assignment's page, we are provided a program to validate whether the list is sorted. For the bonus (optional) part of the project, the assignment is to recreate that validation program.
 
 > [!NOTE]
-> For this assignment in particular, I took the liberty to have fun by writing particular parts to be as contrived as the assignment - e.g. `index_to_prepend` where I used type-casting and bit operations to hold two values in one variable, complying with the school's 5 variable declaration limit. The majority of the code should be readable enough though!
+> The efficiency requirements are tight enough that earlier students gave up after months of trying to invent sufficient ones or adjust common ones.  
+> Our student cohort got recommended to pick between Radix Sort and the [Turks](https://medium.com/@ayogun/push-swap-c1f5d2d41e97) algorithm (the one I reimplemented) invented specifically for this assignment.
+
+> A lot of us students found this particular project to be relatively contrived and not educational. I took the liberty to have fun in the assignment by writing particular parts in an excessively 'clever'/obtuse way - e.g. `index_to_prepend` where I used type-casting and bit operations to hold two values in one variable, to comply with the school's 5 variable declaration limit. The majority of the code should be readable enough though!
 
 ---
 
