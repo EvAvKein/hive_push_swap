@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 11:34:47 by ekeinan           #+#    #+#             */
-/*   Updated: 2025/01/01 16:48:17 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/02 10:48:39 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 	stack_a = args_to_list(argc, argv);
 	if (!stack_a || args_dupe_check(&stack_a))
 	{
-		stack_clear(&stack_a);
+		free_and_write(&stack_a, &stack_b, 2, "Error\n");
 		return (1);
 	}
 	stack_b = NULL;
