@@ -6,7 +6,7 @@
 #    By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 09:31:47 by ekeinan           #+#    #+#              #
-#    Updated: 2025/01/01 17:07:51 by ekeinan          ###   ########.fr        #
+#    Updated: 2025/01/02 16:28:24 by ekeinan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CHECKER_NAME = checker_ekeinan
 BONUS_NAME = .bonus
 
 LIBFT_DIR = libft_full
-LIBFT_LIB = libft_full.a
+LIBFT_LIB = $(LIBFT_DIR)/libft_full.a
 
 SRC_CORE = main.c \
 		   args_to_list.c \
@@ -38,31 +38,40 @@ SRC_BONUS = checker.c \
 			swap.c \
 			push.c
 
-
 COMPILE_FLAGS = -Wall -Wextra -Werror
 
+OBJ_CORE = $(SRC_CORE:.c=.o)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+
 all: $(NAME)
+
+$(NAME): $(LIBFT_LIB) $(OBJ_CORE)
+	cc $(COMPILE_FLAGS) $(OBJ_CORE) $(LIBFT_LIB) -o $(NAME)
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR) -s --no-print-directory
 
-$(NAME): $(LIBFT_LIB)
-	cc $(COMPILE_FLAGS) $(SRC_CORE) $(LIBFT_DIR)/$(LIBFT_LIB) -o $(NAME)
+%.o: %.c $(LIBFT_LIB)
+	cc $(COMPILE_FLAGS) -c $< -o $@
 
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(LIBFT_LIB)
-	cc $(COMPILE_FLAGS) $(SRC_BONUS) $(LIBFT_DIR)/$(LIBFT_LIB) -o $(CHECKER_NAME)
+$(BONUS_NAME): $(LIBFT_LIB) $(OBJ_BONUS)
+	cc $(COMPILE_FLAGS) $(OBJ_BONUS) $(LIBFT_LIB) -o $(CHECKER_NAME)
 	@touch $(BONUS_NAME)
 
 clean:
-	@cd $(LIBFT_DIR) && make $@ --no-print-directory
-	@rm -f $(CHECKER_NAME) $(BONUS_NAME)
+	@make -C $(LIBFT_DIR) $@ --no-print-directory
+	@rm -f $(CHECKER_NAME) $(BONUS_NAME) $(OBJ_CORE) $(OBJ_BONUS)
 
 fclean: clean
-	@cd $(LIBFT_DIR) && make $@ --no-print-directory
-	rm -f $(NAME)
+	@make -C $(LIBFT_DIR) $@ --no-print-directory
+	rm -f $(NAME) tags
 
 re: fclean all
 
-.PHONY: bonus .bonus all clean fclean re
+neat: $(NAME) clean
+	ctags -R *
+	clear
+
+.PHONY: all bonus clean fclean re
