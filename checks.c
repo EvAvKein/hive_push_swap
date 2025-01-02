@@ -85,15 +85,15 @@ size_t	index_for_prepend(t_elem **stack, int new, bool descending)
 		return ((num_i(stack, (int)(sm_and_lg & -1u)) + descending) % size);
 	if (new > (sm_and_lg >> sizeof(int) * 8))
 		return ((num_i(stack,
-					(sm_and_lg >> ((sizeof(int) * 8)))) + !descending) % size);
+					sm_and_lg >> (sizeof(int) * 8)) + !descending) % size);
 	current = initial;
 	i = 0;
 	while (!i++ || (current != initial))
 	{
-		if ((descending && ((new < current->prev->num)
-					&& (new > current->num)))
-			|| (!descending && ((new > current->prev->num)
-					&& (new < current->num))))
+		if ((descending && (new < current->prev->num)
+					&& (new > current->num))
+			|| (!descending && (new > current->prev->num)
+					&& (new < current->num)))
 			return (i - 1);
 		current = current->next;
 	}
