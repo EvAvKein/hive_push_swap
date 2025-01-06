@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:35:42 by ekeinan           #+#    #+#             */
-/*   Updated: 2025/01/01 14:23:03 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:58:30 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	error(int *err)
 	return (0);
 }
 
-static int	ft_atoi_strict(const char *str, int *err)
+static int	ft_atoi_strict(char *str, int *err)
 {
 	size_t	i;
 	int		num;
@@ -26,6 +26,8 @@ static int	ft_atoi_strict(const char *str, int *err)
 
 	i = 0;
 	num = 0;
+	if (!str)
+		return (error(err));
 	is_negative = (str[i] == '-');
 	if (!(*str >= '0' && *str <= '9') && !((*str == '-' || *str == '+') && ++i))
 		return (error(err));
@@ -94,8 +96,6 @@ t_elem	*args_to_list(int argc, char **argv)
 	size_t	len;
 
 	arg_arr = NULL;
-	if (argc < 2)
-		return (NULL);
 	if (ft_strchr(argv[1], ' '))
 	{
 		if (argc > 2 || !argv[1][0])
