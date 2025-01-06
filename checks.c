@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:58:17 by ekeinan           #+#    #+#             */
-/*   Updated: 2024/12/31 21:04:01 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/06 14:25:34 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ size_t	index_for_prepend(t_elem **stack, int new, bool descending)
 	while (!i++ || (current != initial))
 	{
 		if ((descending && (new < current->prev->num)
-					&& (new > current->num))
+				&& (new > current->num))
 			|| (!descending && (new > current->prev->num)
-					&& (new < current->num)))
+				&& (new < current->num)))
 			return (i - 1);
 		current = current->next;
 	}
