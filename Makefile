@@ -6,7 +6,7 @@
 #    By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 09:31:47 by ekeinan           #+#    #+#              #
-#    Updated: 2025/01/02 16:28:24 by ekeinan          ###   ########.fr        #
+#    Updated: 2025/01/03 16:50:58 by ekeinan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,14 +45,14 @@ OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_LIB) $(OBJ_CORE)
-	cc $(COMPILE_FLAGS) $(OBJ_CORE) $(LIBFT_LIB) -o $(NAME)
-
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR) -s --no-print-directory
 
-%.o: %.c $(LIBFT_LIB)
+%.o: %.c
 	cc $(COMPILE_FLAGS) -c $< -o $@
+
+$(NAME): $(LIBFT_LIB) $(OBJ_CORE)
+	cc $(COMPILE_FLAGS) $(OBJ_CORE) $(LIBFT_LIB) -o $(NAME)
 
 bonus: $(BONUS_NAME)
 
