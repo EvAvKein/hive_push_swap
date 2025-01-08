@@ -6,7 +6,7 @@
 #    By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 09:31:47 by ekeinan           #+#    #+#              #
-#    Updated: 2025/01/03 16:50:58 by ekeinan          ###   ########.fr        #
+#    Updated: 2025/01/08 11:58:45 by ekeinan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,11 +62,11 @@ $(BONUS_NAME): $(LIBFT_LIB) $(OBJ_BONUS)
 
 clean:
 	@make -C $(LIBFT_DIR) $@ --no-print-directory
-	@rm -f $(CHECKER_NAME) $(BONUS_NAME) $(OBJ_CORE) $(OBJ_BONUS)
+	@rm -f $(OBJ_CORE) $(OBJ_BONUS)
 
 fclean: clean
 	@make -C $(LIBFT_DIR) $@ --no-print-directory
-	rm -f $(NAME) tags
+	rm -f $(NAME) $(CHECKER_NAME) $(BONUS_NAME) tags
 
 re: fclean all
 
