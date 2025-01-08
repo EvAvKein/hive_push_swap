@@ -24,6 +24,8 @@
 // 2 1 3 4 5
 void	swap(t_elem **stack, char name)
 {
+	if (!stack || !*stack)
+		return ;
 	if ((*stack)->next->next == *stack)
 		*stack = (*stack)->next;
 	else

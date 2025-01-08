@@ -42,6 +42,8 @@ static void	push_operation(t_elem **stack1, t_elem **stack2)
 
 void	push(t_elem **stack1, t_elem **stack2, char stack2_name)
 {
+	if (!stack1 || !*stack1 || !stack2 || !*stack2)
+		return ;
 	push_operation(stack1, stack2);
 	if (stack2_name)
 		ft_printf("p%c\n", stack2_name);

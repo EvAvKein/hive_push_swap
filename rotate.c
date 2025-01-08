@@ -14,6 +14,8 @@
 
 void	rotate(t_elem **stack, char name)
 {
+	if (!stack || !*stack)
+		return ;
 	*stack = (*stack)->next;
 	if (name)
 		ft_printf("r%c\n", name);
@@ -29,6 +31,8 @@ void	rotate_both(t_elem **stack1, t_elem **stack2, bool print)
 
 void	rev_rotate(t_elem **stack, char name)
 {
+	if (!stack || !*stack)
+		return ;
 	*stack = (*stack)->prev;
 	if (name)
 		ft_printf("rr%c\n", name);
