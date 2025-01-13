@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 11:34:47 by ekeinan           #+#    #+#             */
-/*   Updated: 2025/01/08 14:59:38 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:48:43 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ static void	validate(t_elem **stack_a, t_elem **stack_b)
 			return (free_and_write(stack_a, stack_b, 1, "KO\n"));
 		}
 		do_instruction(stack_a, stack_b, line, &err);
+		free(line);
 		if (err)
 			return (free_and_write(stack_a, stack_b, 2, "Error\n"));
-		free(line);
 	}
 }
 

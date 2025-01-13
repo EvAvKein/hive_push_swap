@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:35:42 by ekeinan           #+#    #+#             */
-/*   Updated: 2025/01/06 14:58:30 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:56:55 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ static int	ft_atoi_strict(char *str, int *err)
 	num = 0;
 	if (!str)
 		return (error(err));
+	if (!ft_strncmp(str, "-2147483648", 12))
+		return (-2147483648);
 	is_negative = (str[i] == '-');
-	if (!(*str >= '0' && *str <= '9') && !((*str == '-' || *str == '+') && ++i))
-		return (error(err));
-	if (!str[i])
+	if ((!(*str >= '0' && *str <= '9')
+		&& !((*str == '-' || *str == '+') && ++i)) || !str[i])
 		return (error(err));
 	while (str[i] >= '0' && str[i] <= '9')
 	{
