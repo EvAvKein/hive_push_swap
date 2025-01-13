@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:42:52 by ekeinan           #+#    #+#             */
-/*   Updated: 2025/01/01 19:57:45 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/13 09:14:52 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft_full/libft_full.h"
-# include "stdbool.h"
+# include <stdbool.h>
 
 // The structure of each element in the stack
 typedef struct s_elem
