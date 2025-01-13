@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:33:50 by ekeinan           #+#    #+#             */
-/*   Updated: 2025/01/01 19:57:57 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:45:52 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	stack_b = NULL;
-	if (is_sorted(&stack_a))
-		return (0);
-	turks(&stack_a, &stack_b);
+	if (!is_sorted(&stack_a))
+		turks(&stack_a, &stack_b);
 	stack_clear(&stack_a);
 	stack_clear(&stack_b);
 	return (0);
