@@ -42,7 +42,7 @@ In the assignment's page, we are provided a program to validate whether the list
 > The efficiency requirements are tight enough that earlier students gave up after months of trying to invent sufficient algorithms or adjust common ones.
 > Our student cohort got recommended to pick between either Radix Sort or the [Turks](https://medium.com/@ayogun/push-swap-c1f5d2d41e97) algorithm (the one I reimplemented) invented specifically for this assignment.
 
-> A lot of us students found this particular project to be relatively contrived and not educational. I took the liberty to have fun in the assignment by writing particular parts in an excessively 'clever'/obtuse way - e.g. `index_to_prepend` where I used type-casting and bit operations to hold two values in one variable, to comply with the school's 5 variable declaration limit. The majority of the code should be readable enough though!
+> A lot of students found this particular project to be relatively contrived and not educational. I took the liberty to have fun in it by writing particular parts in an excessively 'clever'/obtuse way - e.g. `index_to_prepend` where I used type-casting and bit operations to store two values in one variable (to comply with the school's 5 variable declaration limit) and doing my `push` and `swap` operations without variable declarations. The majority of the code should be readable enough though!
 
 ---
 
