@@ -6,12 +6,12 @@
 #    By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 09:31:47 by ekeinan           #+#    #+#              #
-#    Updated: 2025/01/08 11:58:45 by ekeinan          ###   ########.fr        #
+#    Updated: 2025/01/30 18:51:01 by ekeinan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-CHECKER_NAME = checker_ekeinan
+CHECKER_NAME = checker
 BONUS_NAME = .bonus
 
 LIBFT_DIR = libft_full
