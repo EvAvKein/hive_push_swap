@@ -6,7 +6,7 @@
 /*   By: ekeinan <ekeinan@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 11:34:47 by ekeinan           #+#    #+#             */
-/*   Updated: 2025/01/13 16:48:43 by ekeinan          ###   ########.fr       */
+/*   Updated: 2025/01/31 08:12:25 by ekeinan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	validate(t_elem **stack_a, t_elem **stack_b)
 		line = get_next_line(0);
 		if (!line)
 		{
-			if (is_sorted(stack_a) && !*stack_b)
+			if (*stack_a && is_sorted(stack_a) && !*stack_b)
 				return (free_and_write(stack_a, stack_b, 1, "OK\n"));
 			return (free_and_write(stack_a, stack_b, 1, "KO\n"));
 		}
