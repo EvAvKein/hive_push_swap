@@ -38,6 +38,7 @@ SRC_BONUS = checker.c \
 			swap.c \
 			push.c
 
+CC = clang
 COMPILE_FLAGS = -Wall -Wextra -Werror
 
 OBJ_CORE = $(SRC_CORE:.c=.o)
@@ -49,15 +50,15 @@ $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR) -s --no-print-directory
 
 %.o: %.c
-	cc $(COMPILE_FLAGS) -c $< -o $@
+	$(CC) $(COMPILE_FLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT_LIB) $(OBJ_CORE)
-	cc $(COMPILE_FLAGS) $(OBJ_CORE) $(LIBFT_LIB) -o $(NAME)
+	$(CC) $(COMPILE_FLAGS) $(OBJ_CORE) $(LIBFT_LIB) -o $(NAME)
 
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(LIBFT_LIB) $(OBJ_BONUS)
-	cc $(COMPILE_FLAGS) $(OBJ_BONUS) $(LIBFT_LIB) -o $(CHECKER_NAME)
+	$(CC) $(COMPILE_FLAGS) $(OBJ_BONUS) $(LIBFT_LIB) -o $(CHECKER_NAME)
 	@touch $(BONUS_NAME)
 
 clean:
